@@ -53,4 +53,5 @@ require('./lib/rest');
 
 server.listen(config.server.port, function () {
   console.log("%s listening at %s", server.name, server.url);
+  console.log("Using instance : %s:%s", config.db.host, config.db.port);
 });
