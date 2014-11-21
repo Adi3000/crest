@@ -23,7 +23,7 @@
     "url": "https://github.com/Cordazar/crest/issues"
   },
   "dependencies": {
-    "mongodb": "1.2.x",
+    "mongodb": "2.0.x",
     "restify": "2.3.x"
   },
   "devDependencies": {

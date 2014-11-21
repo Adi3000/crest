@@ -24,9 +24,9 @@ var config = {
   "debug": false
 };
 
-var debug = module.exports.debug = function (str) {
+var debug = module.exports.debug = function (str, obj) {
   if (config.debug) {
-    console.log(DEBUGPREFIX + str);
+    console.log(DEBUGPREFIX + str, obj);
   }
 };
 
