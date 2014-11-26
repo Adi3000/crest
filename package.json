@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "mongodb": "2.0.x",
-    "restify": "2.3.x"
+    "restify": "2.8.x"
   },
   "devDependencies": {
     "supertest": "0.5.x",

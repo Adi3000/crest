@@ -26,7 +26,7 @@ var config = {
 
 var debug = module.exports.debug = function (str, obj) {
   if (config.debug) {
-    console.log(DEBUGPREFIX + str, obj);
+    console.log(DEBUGPREFIX + str, typeof obj === "undefined" ? "" : obj);
   }
 };
 
