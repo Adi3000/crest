@@ -23,8 +23,10 @@
     "url": "https://github.com/Cordazar/crest/issues"
   },
   "dependencies": {
-    "mongodb": "2.0.x",
-    "restify": "2.8.x"
+    "body-parser": "^1.10.0",
+    "express": "^4.10.4",
+    "express-cluster": "0.0.3",
+    "mongodb": "2.0.x"
   },
   "devDependencies": {
     "supertest": "0.5.x",

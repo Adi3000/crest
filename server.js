@@ -7,7 +7,10 @@
 
 var fs = require("fs"),
   mongodb = require("mongodb"),
-  restify = module.exports.restify = require("restify");
+  express = module.exports.express = require("express"),
+  bodyParser = require('body-parser'),
+  cluster =  require('express-cluster'),
+  server = null;
 
 var DEBUGPREFIX = "DEBUG: ";
 
@@ -18,12 +21,13 @@ var config = {
   },
   "server": {
     "port": 3500,
-    "address": "0.0.0.0"
+    "address": "0.0.0.0",
+    "threads" : 5
   },
   "flavor": "mongodb",
-  "debug": false
-};
+  "debug": false,
 
+};
 var debug = module.exports.debug = function (str, obj) {
   if (config.debug) {
     console.log(DEBUGPREFIX + str, typeof obj === "undefined" ? "" : obj);
@@ -37,21 +41,22 @@ try {
 }
 
 module.exports.config = config;
+cluster(function(worker) {
+  var server = express();
+  // server.acceptable = ['application/json'];
+  // server.use(express.acceptParser(server.acceptable));
+  server.use(bodyParser.urlencoded({ extended: true }));
+  // server.use(bodyParser());
+  // server.use(express.fullResponse());
+  // server.use(express.queryParser());
+  server.use(bodyParser.json());
+  module.exports.server = server;
 
-var server = restify.createServer({
-  name: "crest"
-});
-server.acceptable = ['application/json'];
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.bodyParser());
-server.use(restify.fullResponse());
-server.use(restify.queryParser());
-server.use(restify.jsonp());
-module.exports.server = server;
+  require('./lib/rest');
 
-require('./lib/rest');
+  server.listen(config.server.port, config.server.address, function () {
+    console.log("%s listening at %s", config.server.port, config.server.address);
+    console.log("Using instance : %s:%s", config.db.host, config.db.port);
+  });
+}, {count: config.server.threads});
 
-server.listen(config.server.port, function () {
-  console.log("%s listening at %s", server.name, server.url);
-  console.log("Using instance : %s:%s", config.db.host, config.db.port);
-});
