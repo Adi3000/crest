@@ -1,11 +1,13 @@
 {
   "db": {
-    "port": 27017,
-    "host": "localhost"
+    "host": "ittoolbox-gap2:27017,ittoolbox-gap1:27017,ittoolbox-gap2:27018",
+    "mongoUrlOptions" : "replicaSet=rsgap",
+    "dbList" : ["test", "Context"]
   },
   "server": {
     "port": 3500,
-    "address": "0.0.0.0"
+    "address": "0.0.0.0",
+    "threads" : 8
   },
   "flavor": "normal",
   "debug": true

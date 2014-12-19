@@ -42,7 +42,6 @@ try {
 module.exports.config = config;
 cluster(function(worker) {
   var server = express();
-  var mongoServer = new Server(config.db.host, config.db.port);
   // server.acceptable = ['application/json'];
   // server.use(express.acceptParser(server.acceptable));
   server.use(bodyParser.urlencoded({ extended: true, limit : '50mb' }));
@@ -51,12 +50,11 @@ cluster(function(worker) {
   // server.use(express.queryParser());
   server.use(bodyParser.json({limit: '50mb'}));
   module.exports.server = server;
-  module.exports.mongoServer = mongoServer;
   module.exports.dbPools = {};
   require('./lib/rest');
   server.listen(config.server.port, config.server.address, function () {
     console.log("%s listening at %s", config.server.port, config.server.address);
-    console.log("Using instance : %s:%s", config.db.host, config.db.port);
+    console.log("Using instance(s) : %s", config.db.host);
   });
 }, {count: config.server.threads});
 
