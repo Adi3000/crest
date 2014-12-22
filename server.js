@@ -22,10 +22,10 @@ var config = {
   "server": {
     "port": 3500,
     "address": "0.0.0.0",
-    "threads" : 5
+    "threads" : 1
   },
   "flavor": "mongodb",
-  "debug": false
+  "debug": true
 };
 var debug = module.exports.debug = function (str, obj) {
   if (config.debug) {
@@ -36,7 +36,7 @@ var debug = module.exports.debug = function (str, obj) {
 try {
   config = JSON.parse(fs.readFileSync(process.cwd() + "/config.json"));
 } catch (e) {
-  debug("No config.json file found. Fall back to default config.");
+  debug("No config.json file found. Fall back to default config.", e);
 }
 
 module.exports.config = config;
