@@ -17,3 +17,4 @@ Thumbs.db
 = Node modules =
 ================
 node_modules/
+/.project
