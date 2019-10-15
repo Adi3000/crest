@@ -17,7 +17,8 @@ var DEBUGPREFIX = "DEBUG: ";
 var config = {
   "db": {
     "port": 27017,
-    "host": "localhost"
+    "host": "localhost",
+    "dbList" : ["Context"]
   },
   "server": {
     "port": 3500,
@@ -46,7 +47,7 @@ cluster(function(worker) {
   server.use(bodyParser.json({limit: '50mb'}));
   module.exports.server = server;
   module.exports.dbPools = {};
-  require('./lib/rest');
+  require('./lib/restLight');
   server.listen(config.server.port, config.server.address, function () {
     console.log("%s listening at %s", config.server.port, config.server.address);
     console.log("Using instance(s) : %s", config.db.host);
