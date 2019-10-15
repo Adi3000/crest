@@ -1,13 +1,14 @@
 {
   "db": {
-    "host": "ittoolbox-gap2:27017,ittoolbox-gap1:27017,ittoolbox-gap2:27018",
+    "host": "10.82.228.252:27017,10.82.228.251:27017,10.82.228.251:27018",
     "mongoUrlOptions" : "replicaSet=rsgap",
-    "dbList" : ["test", "Context"]
+    "expireTime" : 3000,
+    "dbList" : ["Context"]
   },
   "server": {
     "port": 3500,
     "address": "0.0.0.0",
-    "threads" : 8
+    "threads" : 1
   },
   "flavor": "normal",
   "debug": true
